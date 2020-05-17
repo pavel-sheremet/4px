@@ -52,4 +52,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Section::class);
     }
+
+    /**
+     * @return boolean
+     * Check is user admin
+     */
+    public function isAdmin()
+    {
+        return $this->roles->contains('slug', 'admin');
+    }
 }
