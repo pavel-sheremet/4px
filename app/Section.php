@@ -18,4 +18,8 @@ class Section extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function getLogoUrlAttribute() {
+        return \Storage::disk('logo')->url($this->logo) ?? false;
+    }
 }

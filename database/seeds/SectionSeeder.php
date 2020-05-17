@@ -1,6 +1,7 @@
 <?php
 
 use App\Section;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class SectionSeeder extends Seeder
@@ -20,6 +21,8 @@ class SectionSeeder extends Seeder
                 $section->description = $faker->description;
                 $section->logo = $faker->logo;
                 $section->save();
+
+                $section->users()->attach(User::inRandomOrder()->first());
             });
     }
 }

@@ -14,7 +14,9 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
+        return view('section.index', [
+            'sections' => Section::with('users')->paginate(3)
+        ]);
     }
 
     /**
