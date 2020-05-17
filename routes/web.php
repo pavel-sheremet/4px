@@ -20,3 +20,23 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'section', 'middleware' => 'admin'], function () {
+    Route::get('/', 'SectionController@index')->name('section.index');
+    Route::get('/create', 'SectionController@create')->name('section.create');
+    Route::post('/store', 'SectionController@store')->name('section.store');
+    Route::get('/edit/{section}', 'SectionController@edit')->name('section.edit');
+    Route::post('/update/{section}', 'SectionController@update')->name('section.update');
+    Route::post('/destroy/{section}', 'SectionController@destrou')->name('section.destroy');
+    Route::get('/{section}', 'SectionController@show')->name('section.show');
+});
+
+Route::group(['prefix' => 'user', 'middleware' => 'admin'], function () {
+    Route::get('/', 'UserController@index')->name('user.index');
+    Route::get('/create', 'UserController@create')->name('user.create');
+    Route::post('/store', 'UserController@store')->name('user.store');
+    Route::get('/edit/{user}', 'UserController@edit')->name('user.edit');
+    Route::post('/update/{user}', 'UserController@update')->name('user.update');
+    Route::post('/destroy/{user}', 'UserController@destrou')->name('user.destroy');
+    Route::get('/{user}', 'UserController@show')->name('user.show');
+});
