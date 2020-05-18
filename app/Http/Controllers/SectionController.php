@@ -2,86 +2,116 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SectionCreated;
+use App\Http\Requests\SectionRequest;
 use App\Section;
-use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\Response;
 
 class SectionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         return view('section.index', [
-            'sections' => Section::with('users')->paginate(3)
+            'sections' => Section::orderBy('id', 'desc')->with('users')->paginate(3)
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
+     * @throws AuthorizationException
      */
     public function create()
     {
-        //
+        $this->authorize('create', Section::class);
+
+        return view('section.edit', [
+            'section' => new Section(),
+            'users' => User::all()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param SectionRequest $request
+     * @return Response
+     * @throws AuthorizationException
      */
-    public function store(Request $request)
+    public function store(SectionRequest $request)
     {
-        //
-    }
+        $this->authorize('create', Section::class);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Section  $section
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Section $section)
-    {
-        //
+        $section = Section::create([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        event(new SectionCreated($section, $request));
+
+        return redirect()->route('section.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Section  $section
-     * @return \Illuminate\Http\Response
+     * @param Section $section
+     * @return Response
+     * @throws AuthorizationException
      */
     public function edit(Section $section)
     {
-        //
+        $this->authorize('create', Section::class);
+
+        return view('section.edit', [
+            'section' => $section,
+            'users' => User::all()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Section  $section
-     * @return \Illuminate\Http\Response
+     * @param SectionRequest $request
+     * @param Section $section
+     * @return Response
+     * @throws AuthorizationException
      */
-    public function update(Request $request, Section $section)
+    public function update(SectionRequest $request, Section $section)
     {
-        //
+        $this->authorize('update', $section);
+
+        $section->update([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        event(new SectionCreated($section, $request));
+
+        return redirect()->route('section.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Section  $section
-     * @return \Illuminate\Http\Response
+     * @param Section $section
+     * @return Response
+     * @throws AuthorizationException
      */
     public function destroy(Section $section)
     {
-        //
+        $this->authorize('delete', $section);
+
+        $section->delete();
+
+        return redirect()->route('section.index');
     }
 }

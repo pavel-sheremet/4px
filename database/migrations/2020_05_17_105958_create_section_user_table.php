@@ -17,8 +17,8 @@ class CreateSectionUserTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('section_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('section_id')->references('id')->on('sections');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
         });
     }
 

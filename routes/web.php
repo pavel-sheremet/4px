@@ -27,8 +27,7 @@ Route::group(['prefix' => 'section', 'middleware' => 'admin'], function () {
     Route::post('/store', 'SectionController@store')->name('section.store');
     Route::get('/edit/{section}', 'SectionController@edit')->name('section.edit');
     Route::post('/update/{section}', 'SectionController@update')->name('section.update');
-    Route::post('/destroy/{section}', 'SectionController@destrou')->name('section.destroy');
-    Route::get('/{section}', 'SectionController@show')->name('section.show');
+    Route::post('/destroy/{section}', 'SectionController@destroy')->name('section.destroy');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'admin'], function () {
@@ -37,6 +36,5 @@ Route::group(['prefix' => 'user', 'middleware' => 'admin'], function () {
     Route::post('/store', 'UserController@store')->name('user.store');
     Route::get('/edit/{user}', 'UserController@edit')->name('user.edit');
     Route::post('/update/{user}', 'UserController@update')->name('user.update');
-    Route::post('/destroy/{user}', 'UserController@destrou')->name('user.destroy');
-    Route::get('/{user}', 'UserController@show')->name('user.show');
+    Route::post('/destroy/{user}', 'UserController@destroy')->name('user.destroy');
 });
