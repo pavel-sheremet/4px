@@ -15,6 +15,6 @@ $factory->define(Section::class, function (Faker $faker) {
     return [
         'name' => $faker->company(),
         'description' => $faker->text(),
-//        'logo' => $faker->image($filepath, 300, 300, null, false)
+        'logo' => $faker->image($filepath, 300, 300, null, false)
     ];
 });
