@@ -32,10 +32,10 @@ class SectionRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => __('section.validation.name.required'),
-            'name.max' => __('section.validation.name.max'),
-            'logo.image' => __('section.validation.logo.image'),
-            'logo.max' => __('section.validation.logo.max'),
+            'name.required' => __('validation.required', ['attribute' => __('section.edit.name.label')]),
+            'name.max' => __('validation.max', ['attribute' => __('section.edit.name.label')]),
+            'logo.image' => __('validation.file.image', ['attribute' => __('section.edit.logo.label')]),
+            'logo.max' => __('validation.file.max', ['attribute' => __('section.edit.logo.label')]),
         ];
     }
 }

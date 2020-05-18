@@ -7,7 +7,8 @@ return [
         'modal' => [
             'title' => 'Подтвердите действие',
             'confirm' => 'Вы действитель хотите удалить отдел :name'
-        ]
+        ],
+        'users' => 'Пользователи'
     ],
     'create' => [
         'title' => 'Создать раздел'
@@ -25,19 +26,4 @@ return [
             'placeholder' => 'Вырерите  изображение'
         ]
     ],
-    'validation' => [
-        'name' => [
-            'required' => 'Поле "Название" обязательно для заполнения',
-            'max' => 'Максимальная длина не сожет превышать 255 символов'
-        ],
-        'logo' => [
-            'image' => 'Можно загружать только изображения',
-            'max' => 'Максимальный размер изображения не может превышать 2МБ'
-        ]
-    ]
 ];
-
-//section.edit.error.name.required
-//section.edit.error.name.max
-//section.edit.error.name.image
-//section.edit.error.name.max

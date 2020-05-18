@@ -14,6 +14,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('section.index') }}">{{ __('section.index.nav') }}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user.index') }}">{{ __('user.index.nav') }}</a>
+                    </li>
                 @endif
             </ul>
 
